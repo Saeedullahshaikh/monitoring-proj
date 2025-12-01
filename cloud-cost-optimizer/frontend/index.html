@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cloud Cost Optimizer</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-top: 0;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: auto;
+            background: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            background: #4CAF50;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background: #45a049;
+        }
+
+        h3 {
+            border-left: 5px solid #4CAF50;
+            padding-left: 10px;
+            color: #333;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            background: #eef2f5;
+            padding: 12px;
+            margin-bottom: 8px;
+            border-radius: 6px;
+            transition: 0.2s;
+        }
+
+        li:hover {
+            background: #dfe6ec;
+        }
+
+        a {
+            text-decoration: none;
+            color: #0077cc;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 25px;
+            color: #666;
+            font-size: 13px;
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="container">
+
+    <h2>☁️ Cloud Cost Optimizer Dashboard</h2>
+
+    <button onclick="triggerRun()"> Run Optimization Now</button>
+
+    <h3>📄 Reports</h3>
+    <ul id="reportList"></ul>
+
+</div>
+
+<div class="footer">
+    ©  Cloud Optimizer 
+</div>
+
+<script>
+async function loadReports() {
+    let res = await fetch("/reports");
+    let data = await res.json();
+    let ul = document.getElementById("reportList");
+    ul.innerHTML = "";
+
+    data.reports.forEach(report => {
+        let li = document.createElement("li");
+        li.innerHTML = `<a href="/reports/${report}" target="_blank">${report}</a>`;
+        ul.appendChild(li);
+    });
+}
+
+async function triggerRun() {
+    await fetch("/run", { method: "POST" });
+    alert("✔ Optimization triggered successfully!");
+    loadReports();
+}
+
+loadReports();
+</script>
+
+</body>
+</html>
