@@ -1,4 +1,4 @@
-# 🛡️ Service Health Monitor (DevSecOps Ready)
+# 🛡️ Service Health Monitor 
 
 A clean, minimal, reusable **DevSecOps-style Service Health Monitoring System** that checks service health, sends alerts, and auto-fixes issues using Docker. Designed exactly according to your architecture — simple, human, and production-friendly.
 
